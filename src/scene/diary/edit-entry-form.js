@@ -52,8 +52,8 @@ const EditEntryForm = ({ onCancel, change, ...props }) => (
         </Row>
       </div>
       <div className={style.buttonsContainer}>
+		<GrayButton className={style.button} value={T('editForm.cancel')} onClick={noSubmit(onCancel)} />
         <BlueButton className={style.button} value={T('editForm.save')} />
-        <GrayButton className={style.button} value={T('editForm.cancel')} onClick={noSubmit(onCancel)} />
       </div>
     </Form>
   </Modal>

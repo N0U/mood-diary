@@ -1,14 +1,15 @@
 .row {
     display: flex;
     margin: 12px 0;
+	flex-direction: column;
 }
 
 .label {
-    display: inline-flex;
-    min-width: 80px;
-    width: 80px;
-    align-items: center;
-    justify-content: flex-start;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	margin-bottom: 10px;
 }
 
 .content {

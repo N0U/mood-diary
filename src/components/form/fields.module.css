@@ -17,15 +17,19 @@
 }
 
 .textArea {
-    display: block;
+    display: flex;
     width: 100%;
     min-height: 140px;
     height: 100%;
-    padding: 4px 4px;
+    padding: 10px;
     border: 0;
     background-color: #dbdbdb;
     box-sizing: border-box;
     resize: none;
+	
+	border-radius: 7px;
+	
+	align-self: stretch;
 }
 
 .textArea:focus {
