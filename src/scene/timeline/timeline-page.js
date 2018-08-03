@@ -7,14 +7,13 @@ import connect from '../../utils/store-connect';
 import { isLoading, entries } from '../../store/diary/selectors';
 import {
   fetchEntries,
-  fetchAll,
 } from '../../store/diary/actions';
 import { EntryShape } from '../../data/entries';
 import Waypoint from 'react-waypoint';
 import Container from '../../components/container/container';
 import { BlueButton } from '../../components/button/button';
 import Block from '../../components/blocks/blocks';
-import MonthCard, { Timeline } from './timeline';
+import MonthCard from './timeline';
 import { T } from '../../translations';
 import styles from './timeline-page.module.css';
 
@@ -24,7 +23,6 @@ class TimelinePage extends Component {
     entries: PropTypes.objectOf(EntryShape).isRequired,
 
     fetchEntries: PropTypes.func.isRequired,
-    fetchAll: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -37,7 +35,6 @@ class TimelinePage extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchAll();
   }
 
   switchSleep = () => this.setState({
@@ -68,7 +65,7 @@ class TimelinePage extends Component {
     const { showSleep, showPower, showMood, lastLoaded } = this.state;
     const allDisabled = !(showSleep || showPower || showMood);
 
-    /*const cards = [];
+    const cards = [];
     if(lastLoaded) {
       let date = moment().startOf('month');
       while(date.isSameOrAfter(lastLoaded, 'month')){
@@ -84,7 +81,7 @@ class TimelinePage extends Component {
         );
         date.subtract(1, 'months');
       }
-    }*/
+    }
 
     return (
       <div>
@@ -114,14 +111,14 @@ class TimelinePage extends Component {
             />
           </div>
         </Container>
-        <Timeline entries={entries} />
-        {/*!isLoading &&
+        {cards}
+        {!isLoading &&
           <Waypoint
             key={lastLoaded ? lastLoaded : moment().toSql()}
             onEnter={this.fetchNextMonth}
             scrollableAncestor={window}
           />
-        */}
+        }
       </div>
     );
   }
@@ -133,7 +130,6 @@ export default connect(
     entries
   },
   {
-    fetchEntries,
-    fetchAll
+    fetchEntries
   }
 )(TimelinePage);
