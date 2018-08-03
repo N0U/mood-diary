@@ -1,8 +1,14 @@
 .form {
-    padding: 8px;
+    padding: 20px;
 }
 
-.fieldsContainer {
+.fieldsContainer 
+{
+	text-align: middle;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	
     /*flex-grow: 1;*/
 }
 
@@ -15,9 +21,11 @@
     padding: 0;
     box-sizing: content-box;
     flex-direction: row;
+	justify-content: space-between;
 }
 
 .button {
+	max-width: 120px;
     /*width: 80px;
     flex-grow: 1;*/
 }

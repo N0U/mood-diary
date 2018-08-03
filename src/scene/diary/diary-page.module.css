@@ -22,8 +22,8 @@
 }
 
 .dateButton {
-    min-width: 225px;
-    width: 225px;
-    max-width: 225px;
+    min-width: 200px;
+    width: 200px;
+    max-width: 200px;
     text-transform: capitalize;
 }

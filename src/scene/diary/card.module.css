@@ -10,8 +10,10 @@
 .comment {
     background-color: #dadada;
     max-height: 80px;
-    padding: 4px;
+    padding: 10px;
     font-size: 14px;
     white-space: pre-line;
     overflow: auto;
+	
+	border-radius: 20px;
 }
