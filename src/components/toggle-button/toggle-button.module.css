@@ -1,0 +1,22 @@
+.checkBox {
+    display: inline-flex;
+    margin: 2px;
+    padding: 0 4px;
+    height: 32px;
+    border: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: #e2e2e2;
+    color: black;
+    cursor: default;
+}
+
+.checkBox:hover {
+    background-color: #3498db;
+    color: white;
+}
+
+.checked {
+    background-color: #3cb0fd;
+    color: white;
+}

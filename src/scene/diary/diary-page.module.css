@@ -1,0 +1,29 @@
+.menu {
+    display: flex;
+    margin: 8px 0;
+    padding: 10px;
+    flex-direction: column;
+    border: none;
+    background-color: white;
+    box-shadow: 3px 3px 3px #a6a6a6;
+    box-sizing: border-box;
+}
+
+.menuRow {
+    display: flex;
+    padding: 4px;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.menuButton {
+    margin: 0 4px;
+}
+
+.dateButton {
+    min-width: 225px;
+    width: 225px;
+    max-width: 225px;
+    text-transform: capitalize;
+}

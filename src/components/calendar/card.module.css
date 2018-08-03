@@ -1,0 +1,22 @@
+.card {
+    padding: 1px;
+    border: none;
+    background-color: white;
+    box-shadow: 3px 3px 3px #a6a6a6;
+    box-sizing: border-box;
+}
+
+.day {
+    font-size: 18px;
+    color: #a3a3a3;
+}
+
+.metrics {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.metrics td {
+    text-align: center;
+    vertical-align: center;
+}

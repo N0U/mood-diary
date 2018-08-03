@@ -1,0 +1,17 @@
+.day {
+    font-size: 18px;
+    color: #a3a3a3;
+}
+
+.separator {
+
+}
+
+.comment {
+    background-color: #dadada;
+    max-height: 80px;
+    padding: 4px;
+    font-size: 14px;
+    white-space: pre-line;
+    overflow: auto;
+}

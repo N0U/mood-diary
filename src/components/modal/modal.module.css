@@ -1,0 +1,14 @@
+.container {
+    max-width: 400px;
+    background-color: white;
+}
+
+.title {
+    padding: 12px 0;
+    margin-bottom: 6px;
+    border-bottom: solid 2px #8f8f8f;
+    font-size: 20px;
+    text-align: center;
+    box-shadow: 3px 3px 3px #a6a6a6;
+    text-transform: uppercase;
+}

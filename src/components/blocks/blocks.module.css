@@ -1,0 +1,26 @@
+.background {
+    width: 100%;
+    height: 28px;
+    background-color: #4b4b4b;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.background td {
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    border: 2px solid black;
+}
+
+.editable {
+    cursor: default;
+}
+
+.editable:hover {
+    background-color: #818181;
+}
+
+.editable td:hover{
+
+}

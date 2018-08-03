@@ -1,0 +1,23 @@
+.form {
+    padding: 8px;
+}
+
+.fieldsContainer {
+    /*flex-grow: 1;*/
+}
+
+.radioBox {
+    width: 40px;
+}
+
+.buttonsContainer {
+    display: flex;
+    padding: 0;
+    box-sizing: content-box;
+    flex-direction: row;
+}
+
+.button {
+    /*width: 80px;
+    flex-grow: 1;*/
+}

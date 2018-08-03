@@ -1,0 +1,48 @@
+.container {
+}
+
+.header {
+    display: flex;
+    padding: 12px 12px;
+    margin-bottom: 6px;
+    border-bottom: solid 2px #8f8f8f;
+    box-shadow: 3px 3px 3px #a6a6a6;
+}
+
+.headerButton {
+    display: inline-block;
+    width: 80px;
+}
+
+.logo {
+    display: flex;
+    margin-left: auto;
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    align-items: center;
+}
+
+.content {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+.addButton {
+    width: 100%;
+    height: 65px;
+    margin: 4px 0;
+    border: none;
+    box-shadow: 3px 3px 3px #a6a6a6;
+    box-sizing: border-box;
+}
+
+.menuContainer {
+    width: 200px;
+    padding: 0 10px;
+}
+
+.menuButton {
+
+}

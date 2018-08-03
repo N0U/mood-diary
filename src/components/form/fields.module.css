@@ -1,0 +1,33 @@
+.inputWrapper {
+    padding: 0;
+}
+
+.text {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 4px 4px;
+    border: 0;
+    background-color: #dbdbdb;
+    box-sizing: border-box;
+}
+
+.text:focus {
+    background-color: #b5b5b5;
+}
+
+.textArea {
+    display: block;
+    width: 100%;
+    min-height: 140px;
+    height: 100%;
+    padding: 4px 4px;
+    border: 0;
+    background-color: #dbdbdb;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.textArea:focus {
+    background-color: #b5b5b5;
+}

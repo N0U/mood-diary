@@ -1,0 +1,17 @@
+.row {
+    display: flex;
+    margin: 12px 0;
+}
+
+.label {
+    display: inline-flex;
+    min-width: 80px;
+    width: 80px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.content {
+    display: inline-block;
+    flex-grow: 1;
+}

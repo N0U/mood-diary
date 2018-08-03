@@ -1,0 +1,40 @@
+.cardTitle {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.monthTable {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: none;
+    font-size: 12px;
+}
+
+.monday {
+    border-bottom: 1px solid black;
+}
+
+.day {
+    width: 20px;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.barsContainer {
+    padding: 0;
+}
+
+.bars {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: none;
+}
+
+.graph {
+    height: 6px;
+}
+
+.graph > td {
+}

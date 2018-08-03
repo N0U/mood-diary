@@ -1,0 +1,16 @@
+.container {
+    padding: 10px;
+    border: none;
+    background-color: white;
+    box-shadow: 3px 3px 3px #a6a6a6;
+    box-sizing: border-box;
+    flex-grow: 1;
+}
+
+.menuRow {
+    display: flex;
+    padding: 4px;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
