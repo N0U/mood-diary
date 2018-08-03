@@ -107,6 +107,7 @@ RadioBoxField.propTypes = {
 const RenderBarInput = ({ meta: { touched, invalid }, input: { value, onChange }, bar, ...props }) => {
   const Bar = bar;
   return <Bar
+    className={touched && invalid && style.errorBar}
     value={value}
     onClick={onChange}
     {...props}

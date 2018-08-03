@@ -86,7 +86,7 @@ class DiaryPage extends Component {
             <BlueButton className={styles.menuButton} value='<<' onClick={this.previousDay} />
             <BlueButton
               className={classNames(styles.menuButton, styles.dateButton)}
-              value={moment(date).format('dddd, MMMM Do YYYY')}
+              value={moment(date).format('dddd, D MMMM YYYY')}
               onClick={this.showDatePicker}
             />
             <BlueButton
