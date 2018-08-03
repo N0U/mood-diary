@@ -40,7 +40,7 @@ Blocks.propTypes = {
 export default Blocks;
 
 export const Bar = ({ value, max, options = [], ...props }) => {
-  value = typeof value === 'number' ? value : -1;
+  value = Number.isInteger(value) ? value : -1;
   const blocks = [];
   _.times(max, i => {
     blocks.push({
