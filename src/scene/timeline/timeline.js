@@ -4,7 +4,6 @@ import React from 'react';
 import PropTypes from "prop-types";
 import classNames from 'classnames'
 import { EntryShape, SleepLabels, ScaleSize } from '../../data/entries';
-import { FlexibleWidthXYPlot, XAxis, YAxis, LineSeries } from 'react-vis';
 import Container from '../../components/container/container';
 import styles from './timeline.module.css';
 
@@ -46,83 +45,35 @@ const Entry = ({ className, date, entry, ...props }) => (
 );
 
 const MonthCard = ({ month, entries, ...props }) => {
-  const monthStart = moment(month).startOf('month');
+  const upperDate = moment(month).endOf('month').startOf('day');
+  const lowerDate = moment(month).startOf('month').startOf('day');
+  let date = upperDate.clone();
 
-  const monthEntries = _.values(entries)
-    .filter(x => monthStart.isSame(x.date, 'month'))
-    .sort((a, b) => moment(a).valueOf() - moment(b).valueOf());
-
-  const sleepData = monthEntries.map(x => ({
-      date: x.date,
-      value: x.sleep,
-    }));
-  const powerData = monthEntries.map(x => ({
-    date: x.date,
-    value: x.power,
-  }));
-  const moodData = monthEntries.map(x => ({
-    date: x.date,
-    value: x.mood,
-  }));
-
-  return (
-    <Container>
-      <div className={styles.cardTitle}>{monthStart.format('MMMM YYYY')}</div>
-      <FlexibleWidthXYPlot
-        height={300}
-        getY={x => moment(x.date).day()}
-        getX={x => x.value}
-      >
-        <XAxis
-          orientation='top'
-        />
-        <YAxis
-        />
-        <LineSeries color='#22aee3' data={sleepData} />
-        <LineSeries color='#f7bc0a' data={powerData} />
-        <LineSeries color='#6ebe41' data={moodData} />
-      </FlexibleWidthXYPlot>
-    </Container>
-  );
-};
-
-export const Timeline = ({ entries }) => {
-  const entriesList = _.values(entries)
-    .sort((a, b) => moment(a).valueOf() - moment(b).valueOf());
-
-  const sleepData = entriesList.map(x => ({
-    date: x.date,
-    value: x.sleep,
-  }));
-  const powerData = entriesList.map(x => ({
-    date: x.date,
-    value: x.power,
-  }));
-  const moodData = entriesList.map(x => ({
-    date: x.date,
-    value: x.mood,
-  }));
+  const elems = [];
+  while(date.isSameOrAfter(lowerDate, 'day')){
+    const day = date.startOf('day').toSql();
+    const entry = entries[day];
+    elems.push(<Entry
+      className={date.day() === 1 && styles.monday}
+      key={`Entry-${day}`}
+      date={date.clone()}
+      entry={entry}
+      {...props}
+    />);
+    date.subtract(1, 'days');
+  }
 
   return (
     <Container>
-      <FlexibleWidthXYPlot
-        height={300}
-        getY={x => moment(x.date).day()}
-        getX={x => x.value}
-      >
-        <XAxis
-          orientation='top'
-        />
-        <YAxis
-        />
-        <LineSeries color='#22aee3' data={sleepData} />
-        <LineSeries color='#f7bc0a' data={powerData} />
-        <LineSeries color='#6ebe41' data={moodData} />
-      </FlexibleWidthXYPlot>
+      <div className={styles.cardTitle}>{upperDate.format('MMMM YYYY')}</div>
+      <table className={styles.monthTable}>
+        <tbody>
+          {elems}
+        </tbody>
+      </table>
     </Container>
   );
 };
-
 
 export default MonthCard;
 
