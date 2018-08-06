@@ -6,6 +6,13 @@ import { isLogged } from './store/auth/selectors';
 import { authLogout } from './store/auth/actions';
 import { locale } from './store/settings/selectors';
 import { setLocale } from './store/settings/actions';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link
+} from "react-router-dom";
 import Row from './components/row/row';
 import { BlueButton } from './components/button/button';
 import Modal from './components/modal/modal';
@@ -34,7 +41,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 'diary',
     };
   }
 
@@ -49,11 +55,6 @@ class App extends Component {
     showMenu: false,
   });
 
-  selectPage = page => this.setState({
-    showMenu: false,
-    page,
-  });
-
   onLogout = () => {
     this.props.authLogout();
     this.hideMenu();
@@ -61,39 +62,36 @@ class App extends Component {
 
   render() {
     const { isLogged, locale } = this.props;
-    const { showMenu, page } = this.state;
+    const { showMenu } = this.state;
     return (
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <BlueButton className={styles.headerButton} value={T('top.menu')} onClick={this.showMenu} disabled={!isLogged} />
-          <div className={styles.logo}>{T('top.title')}</div>
+      <Router>
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <BlueButton className={styles.headerButton} value={T('top.menu')} onClick={this.showMenu} disabled={!isLogged} />
+            <div className={styles.logo}>{T('top.title')}</div>
+          </div>
+            <div className={styles.content}>
+              {isLogged && <Switch>
+                <Route path="/diary" component={DiaryPage} />
+                <Route path="/timeline" component={TimelinePage} />
+                <Route path="/impexp" component={ImportExportPage} />
+                <Route render={() => <Redirect to="/diary" />}/>
+              </Switch>}
+              {!isLogged && <Route component={AuthPage} />}
+
+              {showMenu && isLogged &&
+                <Modal onBackgroundClick={this.hideMenu}>
+                  <div className={styles.menuContainer}>
+                    <Row><Link className={styles.menuButton} to='/diary' onClick={this.hideMenu}>{T('menu.diary')}</Link></Row>
+                    <Row><Link className={styles.menuButton} to='/timeline' onClick={this.hideMenu}>{T('menu.timeline')}</Link></Row>
+                    <hr />
+                    <Row><a className={styles.menuButton} href='#' onClick={this.onLogout}>{T('menu.logout')}</a></Row>
+                  </div>
+                </Modal>
+              }
+            </div>
         </div>
-        <div className={styles.content}>
-          {isLogged ?
-            <DiaryPagesWrapper><PageSwitch
-              name={page}
-              pages={{
-                diary: DiaryPage,
-                timeline: TimelinePage,
-                importexport: ImportExportPage,
-              }}
-            /></DiaryPagesWrapper> :
-            <AuthPage />
-          }
-          {showMenu && isLogged &&
-            <Modal onBackgroundClick={this.hideMenu}>
-              <div className={styles.menuContainer}>
-                <Row><BlueButton className={styles.menuButton} value={T('menu.diary')} onClick={() => this.selectPage('diary')} /></Row>
-                <Row><BlueButton className={styles.menuButton} value={T('menu.timeline')} onClick={() => this.selectPage('timeline')} /></Row>
-                <hr />
-                <Row><BlueButton className={styles.menuButton} value={T('menu.impexp')} onClick={() => this.selectPage('importexport')} /></Row>
-                <hr />
-                <Row><BlueButton className={styles.menuButton} value={T('menu.logout')} onClick={this.onLogout} /></Row>
-              </div>
-            </Modal>
-          }
-        </div>
-      </div>
+      </Router>
     );
   }
 }

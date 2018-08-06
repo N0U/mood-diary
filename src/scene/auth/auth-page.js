@@ -47,7 +47,7 @@ class AuthPage extends Component {
       <div>
         <Container>
           <Row><BlueButton value='Vk' onClick={this.vkLogin}/></Row>
-          <Row><BlueButton value='GDisk' onClick={this.gDiskLogin} disabled /></Row>
+          {/*<Row><BlueButton value='GDisk' onClick={this.gDiskLogin} disabled /></Row>*/}
         </Container>
         {isLoading && <Spinner />}
       </div>
