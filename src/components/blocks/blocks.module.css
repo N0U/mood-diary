@@ -3,15 +3,36 @@
     height: 28px;
     background-color: #4b4b4b;
     table-layout: fixed;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-style: hidden;
 }
 
 .background td {
     text-align: center;
     vertical-align: middle;
     color: white;
-    border: 2px solid black;
+    border-right: 2px solid black;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
 }
+
+.background td:first-child {
+    border-left: 2px solid black;
+}
+
+.background,
+.background td:first-child,
+.background tr {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.background,
+.background td:last-child,
+.background tr {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+ }
 
 .editable {
     cursor: default;
