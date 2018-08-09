@@ -7,7 +7,7 @@ import { authLogout } from './store/auth/actions';
 import { locale } from './store/settings/selectors';
 import { setLocale } from './store/settings/actions';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Redirect,
