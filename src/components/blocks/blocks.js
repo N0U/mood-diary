@@ -13,7 +13,7 @@ const Blocks = ({ className, color, options, onClick }) => (
             <td
               style={{
                 backgroundColor: active ? (localColor || color) : undefined,
-                color: active ? 'black' : undefined,
+                color: 'black',
               }}
               onClick={localClick || (onClick && (() => onClick(i)))}
             >
