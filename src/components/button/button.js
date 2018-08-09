@@ -23,12 +23,14 @@ export const GrayButton = ({className, ...props}) => (
   <BasicButton className={classNames(gray, className)} {...props} />
 );
 
-export const Button = ({ className, color, onClick, disabled = false, children }) => (
+export const Button = ({ className, color, icon, iconSize = 20,
+                         onClick, disabled = false, children }) => (
   <button
     className={classNames(styles.button, styles.buttonBlue, className)}
     disabled={disabled}
     onClick={onClick}
   >
+    {icon && <i className='f7-icons' style={{ ['font-size']: iconSize }}>{icon}</i>}
     {children}
   </button>
 );
@@ -36,7 +38,17 @@ export const Button = ({ className, color, onClick, disabled = false, children }
 Button.propTypes = {
   className: PropTypes.string,
   color: PropTypes.string,
+  icon: PropTypes.string,
+  iconSize: PropTypes.number,
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
+  children: PropTypes.node,
+};
+
+export const Segmented = ({ children }) => (
+  <div className={styles.segmented}>{children}</div>
+);
+
+Segmented.propTypes = {
   children: PropTypes.node,
 };

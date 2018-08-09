@@ -13,7 +13,7 @@ import {
 } from '../../store/diary/actions';
 import { EntryShape } from '../../data/entries';
 import Container from '../../components/container/container';
-import { Button } from '../../components/button/button';
+import { Segmented, Button } from '../../components/button/button';
 import DatePickerWindow from '../../components/date-picker-window/date-picker-window';
 import Card from './card';
 import EditEntryForm from './edit-entry-form.js';
@@ -83,16 +83,18 @@ class DiaryPage extends Component {
       <div>
         <Container>
           <div className={styles.menuRow}>
-            <Button className={styles.menuButton} onClick={this.previousDay}>{'<<'}</Button>
-            <Button
-              className={classNames(styles.menuButton, styles.dateButton)}
-              onClick={this.showDatePicker}
-            >{moment(date).format('dddd, D MMMM YYYY')}</Button>
-            <Button
-              className={styles.menuButton}
-              onClick={this.nextDay}
-              disabled={moment().isSame(date, 'day')}
-            >{'>>'}</Button>
+            <Segmented>
+              <Button onClick={this.previousDay} icon='arrow_left' />
+              <Button
+                className={classNames(styles.menuButton, styles.dateButton)}
+                onClick={this.showDatePicker}
+              >{moment(date).format('dddd, D MMMM YYYY')}</Button>
+              <Button
+                onClick={this.nextDay}
+                disabled={moment().isSame(date, 'day')}
+                icon='arrow_right'
+              />
+            </Segmented>
           </div>
         </Container>
         <Card entry={entry} onEdit={this.showAddingForm}/>
