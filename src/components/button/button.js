@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import {basic, red, blue, gray} from './button.module.css'
+import styles, {basic, red, blue, gray} from './button.module.css'
 
 export const BasicButton = ({className, ...props}) => (
     <input className={classNames(className, basic)} type='Submit' onChange={() => {}} {...props} />
@@ -22,3 +22,21 @@ export const BlueButton = ({className, ...props}) => (
 export const GrayButton = ({className, ...props}) => (
   <BasicButton className={classNames(gray, className)} {...props} />
 );
+
+export const Button = ({ className, color, onClick, disabled = false, children }) => (
+  <button
+    className={classNames(styles.button, styles.buttonBlue, className)}
+    disabled={disabled}
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
+
+Button.propTypes = {
+  className: PropTypes.string,
+  color: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  children: PropTypes.node,
+};

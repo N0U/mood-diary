@@ -13,7 +13,7 @@ import {
 } from '../../store/diary/actions';
 import { EntryShape } from '../../data/entries';
 import Container from '../../components/container/container';
-import { BlueButton } from '../../components/button/button';
+import { Button } from '../../components/button/button';
 import DatePickerWindow from '../../components/date-picker-window/date-picker-window';
 import Card from './card';
 import EditEntryForm from './edit-entry-form.js';
@@ -83,18 +83,16 @@ class DiaryPage extends Component {
       <div>
         <Container>
           <div className={styles.menuRow}>
-            <BlueButton className={styles.menuButton} value='<<' onClick={this.previousDay} />
-            <BlueButton
+            <Button className={styles.menuButton} onClick={this.previousDay}>{'<<'}</Button>
+            <Button
               className={classNames(styles.menuButton, styles.dateButton)}
-              value={moment(date).format('dddd, D MMMM YYYY')}
               onClick={this.showDatePicker}
-            />
-            <BlueButton
+            >{moment(date).format('dddd, D MMMM YYYY')}</Button>
+            <Button
               className={styles.menuButton}
-              value='>>'
               onClick={this.nextDay}
               disabled={moment().isSame(date, 'day')}
-            />
+            >{'>>'}</Button>
           </div>
         </Container>
         <Card entry={entry} onEdit={this.showAddingForm}/>

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import classNames from 'classnames'
 import { EntryShape, SleepLabels, ScaleSize } from '../../data/entries';
 import Container from '../../components/container/container';
-import { BlueButton } from '../../components/button/button';
+import { Button } from '../../components/button/button';
 import Row from '../../components/row/row';
 import { BlueBar, YellowBar, GreenBar, PinkBlocks } from '../../components/blocks/blocks';
 import { T } from '../../translations';
@@ -39,12 +39,12 @@ const Entry = ({ sleep, power, mood, insomnia, headache, heartache, comment, onE
         <div className={styles.comment}>{comment}</div>
       </Row>
     }
-    <BlueButton value={T('card.edit')} onClick={onEdit}/>
+    <Button onClick={onEdit}>{T('card.edit')}</Button>
   </div>;
 
 const EmptyEntry = ({ onAdd }) =>
   <div>
-    <BlueButton value={T('card.add')} onClick={onAdd}/>
+    <Button onClick={onAdd}>{T('card.add')}</Button>
   </div>;
 
 const Card = ({ entry, onEdit }) => (
