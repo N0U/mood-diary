@@ -24,9 +24,10 @@ export const GrayButton = ({className, ...props}) => (
 );
 
 export const Button = ({ className, color, icon, iconSize = 20,
-                         onClick, disabled = false, children }) => (
+                         onClick, disabled = false, children,
+                          active }) => (
   <button
-    className={classNames(styles.button, styles.buttonBlue, className)}
+    className={classNames(styles.button, styles.buttonBlue, active && styles.active, className)}
     disabled={disabled}
     onClick={onClick}
   >
@@ -43,6 +44,7 @@ Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   children: PropTypes.node,
+  active: PropTypes.bool,
 };
 
 export const Segmented = ({ children }) => (

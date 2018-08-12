@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames'
 import styles from './nav-bar.module.css';
 
-const NavBar = ({ onBack, children }) => (
+const NavBar = ({ children }) => (
   <div className={styles.navbar}>
     {children}
   </div>);

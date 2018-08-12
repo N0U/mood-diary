@@ -16,6 +16,7 @@ import Block from '../../components/blocks/blocks';
 import MonthCard from './timeline';
 import { T } from '../../translations';
 import styles from './timeline-page.module.css';
+import Page from '../../layouts/page/page';
 
 class TimelinePage extends Component {
   static propTypes = {
@@ -84,7 +85,7 @@ class TimelinePage extends Component {
     }
 
     return (
-      <div>
+      <Page>
         <Container>
           <div className={styles.menuRow}>
             <Block
@@ -119,7 +120,7 @@ class TimelinePage extends Component {
             scrollableAncestor={window}
           />
         }
-      </div>
+      </Page>
     );
   }
 }

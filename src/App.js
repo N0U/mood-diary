@@ -66,29 +66,13 @@ class App extends Component {
     return (
       <Router>
         <div className={styles.container}>
-          <NavBar>
-            <NavTitle>{T('top.title')}</NavTitle>
-          </NavBar>
-          <div className={styles.content}>
-            {isLogged && <Switch>
-              <Route path="/diary" component={DiaryPage} />
-              <Route path="/timeline" component={TimelinePage} />
-              <Route path="/impexp" component={ImportExportPage} />
-              <Route render={() => <Redirect to="/diary" />}/>
-            </Switch>}
-            {!isLogged && <Route component={AuthPage} />}
-
-            {showMenu && isLogged &&
-              <Modal onBackgroundClick={this.hideMenu}>
-                <div className={styles.menuContainer}>
-                  <Row><Link className={styles.menuButton} to='/diary' onClick={this.hideMenu}>{T('menu.diary')}</Link></Row>
-                  <Row><Link className={styles.menuButton} to='/timeline' onClick={this.hideMenu}>{T('menu.timeline')}</Link></Row>
-                  <hr />
-                  <Row><a className={styles.menuButton} href='#' onClick={this.onLogout}>{T('menu.logout')}</a></Row>
-                </div>
-              </Modal>
-            }
-          </div>
+          {isLogged && <Switch>
+            <Route path="/diary" component={DiaryPage} />
+            <Route path="/timeline" component={TimelinePage} />
+            <Route path="/impexp" component={ImportExportPage} />
+            <Route render={() => <Redirect to="/diary" />}/>
+          </Switch>}
+          {!isLogged && <Route component={AuthPage} />}
         </div>
       </Router>
     );

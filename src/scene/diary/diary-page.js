@@ -18,6 +18,7 @@ import DatePickerWindow from '../../components/date-picker-window/date-picker-wi
 import Card from './card';
 import EditEntryForm from './edit-entry-form.js';
 import styles from './diary-page.module.css';
+import Page from '../../layouts/page/page';
 
 class DiaryPage extends Component {
   static propTypes = {
@@ -80,7 +81,7 @@ class DiaryPage extends Component {
     const { showEditForm, showDatePicker } = this.state;
     const entry = entries[date];
     return (
-      <div>
+      <Page>
         <Container>
           <Segmented>
             <Button onClick={this.previousDay} icon='arrow_left' />
@@ -110,7 +111,7 @@ class DiaryPage extends Component {
             onClose={this.hideDatePicker}
           />
         }
-      </div>
+      </Page>
     );
   }
 }
