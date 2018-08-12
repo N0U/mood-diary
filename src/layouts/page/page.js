@@ -14,12 +14,16 @@ Header.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const Page = ({ header, children }) => (
+const Page = ({ header, children, onLogout }) => (
   <div className={styles.page}>
     {header || <Header>
-      <NavBar>
-        <NavTitle>{T('top.title')}</NavTitle>
-        <NavRight onClick={() => {}} text={T('menu.logout')} />
+      <NavBar right={{
+        icon: 'logout',
+        iconSize: 28,
+        onClick: onLogout,
+      }}
+      >
+        {T('top.title')}
       </NavBar>
       <TabBar>
         <Tab path='/diary'>{T('menu.diary')}</Tab>
@@ -37,5 +41,6 @@ export default Page;
 
 Page.propTypes = {
   header: PropTypes.node,
+  onLogout: PropTypes.func,
   children: PropTypes.node.isRequired,
 };

@@ -11,6 +11,7 @@ import {
   deleteEntry,
   setDiaryDate,
 } from '../../store/diary/actions';
+import { authLogout } from '../../store/auth/actions';
 import { EntryShape } from '../../data/entries';
 import Container from '../../components/container/container';
 import { Segmented, Button } from '../../components/button/button';
@@ -29,6 +30,7 @@ class DiaryPage extends Component {
     createEntry: PropTypes.func.isRequired,
     deleteEntry: PropTypes.func.isRequired,
     setDiaryDate: PropTypes.func.isRequired,
+    authLogout: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -77,11 +79,11 @@ class DiaryPage extends Component {
   };
 
   render() {
-    const { entries, date } = this.props;
+    const { authLogout, entries, date } = this.props;
     const { showEditForm, showDatePicker } = this.state;
     const entry = entries[date];
     return (
-      <Page>
+      <Page onLogout={authLogout}>
         <Container>
           <Segmented>
             <Button onClick={this.previousDay} icon='arrow_left' />
@@ -126,5 +128,6 @@ export default connect(
     createEntry,
     deleteEntry,
     setDiaryDate,
+    authLogout,
   }
 )(DiaryPage);

@@ -1,47 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames'
+import { Button } from '../button/button';
 import styles from './nav-bar.module.css';
 
-const NavBar = ({ children }) => (
+const NavCtrl = ({ onClick = () => {}, icon, iconSize = 20, text }) => (
+  <div className={classNames(styles.navCtrl)} onClick={onClick}>
+    {icon && <i className='f7-icons' style={{ ['font-size']: iconSize }}>{icon}</i>}
+    {text}
+  </div>
+);
+
+NavCtrl.propTypes = {
+  onClick: PropTypes.func,
+  icon: PropTypes.string,
+  iconSize: PropTypes.number,
+  text: PropTypes.string,
+};
+
+const NavBar = ({ left, children, right }) => (
   <div className={styles.navbar}>
-    {children}
+    <NavCtrl {...left} />
+    <div className={styles.navTitle}>{children}</div>
+    <NavCtrl {...right} />
   </div>);
 
 export default NavBar;
 
 NavBar.propTypes = {
+  left: PropTypes.shape({
+    onClick: PropTypes.func.isRequired,
+    icon: PropTypes.string,
+    iconSize: PropTypes.number,
+    text: PropTypes.string,
+  }),
   children: PropTypes.node,
-};
-
-export const NavLeft = ({ onClick, icon, iconSize = 20, text }) => (
-  <div className={classNames(styles.navCtrl, styles.navLeft)} onClick={onClick}>
-    {icon && <i className='f7-icons' style={{ ['font-size']: iconSize }}>{icon}</i>}
-    {text}
-  </div>
-);
-
-NavLeft.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  icon: PropTypes.string,
-  iconSize: PropTypes.number,
-  text: PropTypes.string,
-};
-
-export const NavTitle = ({ children }) => (
-  <div className={styles.navTitle}>{children}</div>
-);
-
-export const NavRight = ({ onClick, icon, iconSize = 20, text }) => (
-  <div className={classNames(styles.navCtrl, styles.navRight)} onClick={onClick}>
-    {text}
-    {icon && <i className='f7-icons' style={{ ['font-size']: iconSize }}>{icon}</i>}
-  </div>
-);
-
-NavRight.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  icon: PropTypes.string,
-  iconSize: PropTypes.number,
-  text: PropTypes.string,
+  right: PropTypes.shape({
+    onClick: PropTypes.func.isRequired,
+    icon: PropTypes.string,
+    iconSize: PropTypes.number,
+    text: PropTypes.string,
+  }),
 };

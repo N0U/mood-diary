@@ -48,9 +48,7 @@ class AuthPage extends Component {
   renderHeader() {
     return (
       <Header>
-        <NavBar>
-          <NavTitle>{T('top.title')}</NavTitle>
-        </NavBar>
+        <NavBar>{T('top.title')}</NavBar>
       </Header>
     );
   }
