@@ -13,6 +13,10 @@ import Spinner from '../../components/spinner/spinner';
 import { BlueButton } from '../../components/button/button';
 import Container from '../../components/container/container';
 import Row from '../../components/row/row';
+import NavBar, { NavTitle } from '../../components/nav-bar/nav-bar'
+import Page, { Header } from '../../layouts/page/page';
+import { T } from '../../translations';
+
 import styles from './auth-page.module.css';
 
 class AuthPage extends Component {
@@ -41,16 +45,26 @@ class AuthPage extends Component {
 
   gDiskLogin = () => {};
 
+  renderHeader() {
+    return (
+      <Header>
+        <NavBar>
+          <NavTitle>{T('top.title')}</NavTitle>
+        </NavBar>
+      </Header>
+    );
+  }
+
   render() {
     const { isLoading, entries } = this.props;
     return (
-      <div>
+      <Page header={this.renderHeader()}>
         <Container>
           <Row><BlueButton value='Vk' onClick={this.vkLogin}/></Row>
           {/*<Row><BlueButton value='GDisk' onClick={this.gDiskLogin} disabled /></Row>*/}
         </Container>
         {isLoading && <Spinner />}
-      </div>
+      </Page>
     );
   }
 }

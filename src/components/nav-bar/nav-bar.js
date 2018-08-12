@@ -15,10 +15,10 @@ NavBar.propTypes = {
 };
 
 export const NavLeft = ({ onClick, icon, iconSize = 20, text }) => (
-  <button className={classNames(styles.navCtrl, styles.navLeft)} onClick={onClick}>
+  <div className={classNames(styles.navCtrl, styles.navLeft)} onClick={onClick}>
     {icon && <i className='f7-icons' style={{ ['font-size']: iconSize }}>{icon}</i>}
     {text}
-  </button>
+  </div>
 );
 
 NavLeft.propTypes = {
@@ -33,10 +33,10 @@ export const NavTitle = ({ children }) => (
 );
 
 export const NavRight = ({ onClick, icon, iconSize = 20, text }) => (
-  <button className={classNames(styles.navCtrl, styles.navRight)} onClick={onClick}>
+  <div className={classNames(styles.navCtrl, styles.navRight)} onClick={onClick}>
     {text}
     {icon && <i className='f7-icons' style={{ ['font-size']: iconSize }}>{icon}</i>}
-  </button>
+  </div>
 );
 
 NavRight.propTypes = {

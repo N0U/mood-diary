@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames'
-import NavBar, { NavTitle } from '../../components/nav-bar/nav-bar'
+import NavBar, { NavTitle, NavRight } from '../../components/nav-bar/nav-bar'
 import TabBar, { Tab } from '../../components/tab-bar/tab-bar';
 import styles from './page.module.css';
 import { T } from '../../translations';
@@ -19,6 +19,7 @@ const Page = ({ header, children }) => (
     {header || <Header>
       <NavBar>
         <NavTitle>{T('top.title')}</NavTitle>
+        <NavRight onClick={() => {}} text={T('menu.logout')} />
       </NavBar>
       <TabBar>
         <Tab path='/diary'>{T('menu.diary')}</Tab>
