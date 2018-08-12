@@ -82,20 +82,18 @@ class DiaryPage extends Component {
     return (
       <div>
         <Container>
-          <div className={styles.menuRow}>
-            <Segmented>
-              <Button onClick={this.previousDay} icon='arrow_left' />
-              <Button
-                className={classNames(styles.menuButton, styles.dateButton)}
-                onClick={this.showDatePicker}
-              >{moment(date).format('dddd, D MMMM YYYY')}</Button>
-              <Button
-                onClick={this.nextDay}
-                disabled={moment().isSame(date, 'day')}
-                icon='arrow_right'
-              />
-            </Segmented>
-          </div>
+          <Segmented>
+            <Button onClick={this.previousDay} icon='arrow_left' />
+            <Button
+              className={classNames(styles.dateButton)}
+              onClick={this.showDatePicker}
+            >{moment(date).format('dddd, D MMMM YYYY')}</Button>
+            <Button
+              onClick={this.nextDay}
+              disabled={moment().isSame(date, 'day')}
+              icon='arrow_right'
+            />
+          </Segmented>
         </Container>
         <Card entry={entry} onEdit={this.showAddingForm}/>
         {showEditForm &&
