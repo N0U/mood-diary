@@ -7,7 +7,7 @@ import Form from '../../components/form/form';
 import Row from '../../components/row/row';
 import { TextField, TextAreaField, BarField, BlockFields } from '../../components/form/fields';
 import { BlueBar, YellowBar, GreenBar, PinkBlocks } from '../../components/blocks/blocks';
-import { GrayButton, BlueButton } from "../../components/button/button";
+import { Button } from "../../components/button/button";
 import { noSubmit } from '../../utils/forms';
 import { T } from '../../translations';
 import style from './edit-entry-form.module.css';
@@ -52,8 +52,8 @@ const EditEntryForm = ({ onCancel, change, ...props }) => (
         </Row>
       </div>
       <div className={style.buttonsContainer}>
-		<GrayButton className={style.button} value={T('editForm.cancel')} onClick={noSubmit(onCancel)} />
-        <BlueButton className={style.button} value={T('editForm.save')} />
+        <Button className={style.button} onClick={noSubmit(onCancel)}>{T('editForm.cancel')}</Button>
+        <Button className={style.button} >{T('editForm.save')}</Button>
       </div>
     </Form>
   </Modal>
