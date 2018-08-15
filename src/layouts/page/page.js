@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames'
-import NavBar, { NavTitle, NavRight } from '../../components/nav-bar/nav-bar'
+import NavBar from '../../components/nav-bar/nav-bar'
 import TabBar, { Tab } from '../../components/tab-bar/tab-bar';
 import styles from './page.module.css';
 import { T } from '../../translations';

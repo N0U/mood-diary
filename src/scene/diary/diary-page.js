@@ -48,8 +48,6 @@ class DiaryPage extends Component {
       this.props.fetchEntries(newDate);
   }
 
-  submitAddingForm = data => this.props.createEntry(data, this.props.date);
-
   nextDay = () => this.props.setDiaryDate(moment(this.props.date).add(1, 'days'));
 
   previousDay = () => this.props.setDiaryDate(moment(this.props.date).subtract(1, 'days'));

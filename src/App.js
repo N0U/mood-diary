@@ -21,6 +21,7 @@ import AuthPage from './scene/auth/auth-page';
 import DiaryPage from './scene/diary/diary-page';
 import TimelinePage from './scene/timeline/timeline-page';
 import ImportExportPage from './scene/import-export/import-export-page';
+import EditEntryPage from './scene/edit-entry/edit-entry-page';
 import styles from './app.module.css';
 import { T } from './translations';
 
@@ -70,6 +71,7 @@ class App extends Component {
             <Route path="/diary" component={DiaryPage} />
             <Route path="/timeline" component={TimelinePage} />
             <Route path="/impexp" component={ImportExportPage} />
+            <Route path="/edit/:date" component={EditEntryPage} />
             <Route render={() => <Redirect to="/diary" />}/>
           </Switch>}
           {!isLogged && <Route component={AuthPage} />}
