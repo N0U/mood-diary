@@ -27,7 +27,6 @@ TabBar.contextTypes = {
 };
 
 export const Tab = ({ path, children }, { router: { history: { push, location } } }) => {
-  console.log(location);
   return (
     <Button active={location.pathname === path} onClick={() => push(path)}>{children}</Button>
   );

@@ -10,7 +10,7 @@ import { BlueBar, YellowBar, GreenBar, PinkBlocks } from '../../components/block
 import { T } from '../../translations';
 import styles from './card.module.css';
 
-const Entry = ({ sleep, power, mood, insomnia, headache, heartache, comment, onEdit }) =>
+const Entry = ({ date, sleep, power, mood, insomnia, headache, heartache, comment }) =>
   <div>
     <Row label={T('params.sleep')}><BlueBar value={sleep} max={ScaleSize} options={SleepLabels}/></Row>
     <Row label={T('params.power')}><YellowBar value={power} max={ScaleSize}/></Row>
@@ -39,23 +39,23 @@ const Entry = ({ sleep, power, mood, insomnia, headache, heartache, comment, onE
         <div className={styles.comment}>{comment}</div>
       </Row>
     }
-    <Button onClick={onEdit}>{T('card.edit')}</Button>
+    <Button link={`/edit/${date}`}>{T('card.edit')}</Button>
   </div>;
 
-const EmptyEntry = ({ onAdd }) =>
+const EmptyEntry = ({ date }) =>
   <div>
-    <Button onClick={onAdd}>{T('card.add')}</Button>
+    <Button link={`/edit/${date}`}>{T('card.add')}</Button>
   </div>;
 
-const Card = ({ entry, onEdit }) => (
+const Card = ({ date, entry }) => (
   <Container>
-    {entry ? <Entry {...entry} onEdit={onEdit}/> : <EmptyEntry onAdd={onEdit}/>}
+    {entry ? <Entry {...entry}/> : <EmptyEntry date={date}/>}
   </Container>
 );
 
 export default Card;
 
 Card.propTypes = {
+  date: PropTypes.string.isRequired,
   entry: PropTypes.shape(EntryShape),
-  onEdit: PropTypes.func.isRequired,
 };

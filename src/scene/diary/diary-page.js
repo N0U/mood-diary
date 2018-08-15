@@ -17,7 +17,6 @@ import Container from '../../components/container/container';
 import { Segmented, Button } from '../../components/button/button';
 import DatePickerWindow from '../../components/date-picker-window/date-picker-window';
 import Card from './card';
-import EditEntryForm from './edit-entry-form.js';
 import styles from './diary-page.module.css';
 import Page from '../../layouts/page/page';
 
@@ -48,14 +47,6 @@ class DiaryPage extends Component {
     if(!moment(oldDate).isSame(newDate, 'month'))
       this.props.fetchEntries(newDate);
   }
-
-  showAddingForm = () => this.setState({
-    showEditForm: true,
-  });
-
-  hideAddingForm = () => this.setState({
-    showEditForm: false,
-  });
 
   submitAddingForm = data => this.props.createEntry(data, this.props.date);
 
@@ -98,14 +89,7 @@ class DiaryPage extends Component {
             />
           </Segmented>
         </Container>
-        <Card entry={entry} onEdit={this.showAddingForm}/>
-        {showEditForm &&
-          <EditEntryForm
-            initialValues={entry}
-            onCancel={this.hideAddingForm}
-            onSubmit={this.submitAddingForm}
-            onSubmitSuccess={this.hideAddingForm}
-          />}
+        <Card date={date} entry={entry} />
         {showDatePicker &&
           <DatePickerWindow
             date={date}
