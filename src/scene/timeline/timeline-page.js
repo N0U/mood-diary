@@ -8,6 +8,7 @@ import { isLoading, entries } from '../../store/diary/selectors';
 import {
   fetchEntries,
 } from '../../store/diary/actions';
+import { authLogout } from '../../store/auth/actions';
 import { EntryShape } from '../../data/entries';
 import Waypoint from 'react-waypoint';
 import Container from '../../components/container/container';
@@ -16,6 +17,7 @@ import Block from '../../components/blocks/blocks';
 import MonthCard from './timeline';
 import { T } from '../../translations';
 import styles from './timeline-page.module.css';
+import Page from '../../layouts/page/page';
 
 class TimelinePage extends Component {
   static propTypes = {
@@ -23,6 +25,7 @@ class TimelinePage extends Component {
     entries: PropTypes.objectOf(EntryShape).isRequired,
 
     fetchEntries: PropTypes.func.isRequired,
+    authLogout: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -61,7 +64,7 @@ class TimelinePage extends Component {
   };
 
   render() {
-    const { isLoading, entries } = this.props;
+    const { authLogout, isLoading, entries } = this.props;
     const { showSleep, showPower, showMood, lastLoaded } = this.state;
     const allDisabled = !(showSleep || showPower || showMood);
 
@@ -84,7 +87,7 @@ class TimelinePage extends Component {
     }
 
     return (
-      <div>
+      <Page onLogout={authLogout}>
         <Container>
           <div className={styles.menuRow}>
             <Block
@@ -119,7 +122,7 @@ class TimelinePage extends Component {
             scrollableAncestor={window}
           />
         }
-      </div>
+      </Page>
     );
   }
 }
@@ -130,6 +133,7 @@ export default connect(
     entries
   },
   {
-    fetchEntries
+    fetchEntries,
+    authLogout
   }
 )(TimelinePage);

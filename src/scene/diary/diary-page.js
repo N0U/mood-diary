@@ -11,13 +11,14 @@ import {
   deleteEntry,
   setDiaryDate,
 } from '../../store/diary/actions';
+import { authLogout } from '../../store/auth/actions';
 import { EntryShape } from '../../data/entries';
 import Container from '../../components/container/container';
-import { BlueButton } from '../../components/button/button';
+import { Segmented, Button } from '../../components/button/button';
 import DatePickerWindow from '../../components/date-picker-window/date-picker-window';
 import Card from './card';
-import EditEntryForm from './edit-entry-form.js';
 import styles from './diary-page.module.css';
+import Page from '../../layouts/page/page';
 
 class DiaryPage extends Component {
   static propTypes = {
@@ -28,6 +29,7 @@ class DiaryPage extends Component {
     createEntry: PropTypes.func.isRequired,
     deleteEntry: PropTypes.func.isRequired,
     setDiaryDate: PropTypes.func.isRequired,
+    authLogout: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -45,16 +47,6 @@ class DiaryPage extends Component {
     if(!moment(oldDate).isSame(newDate, 'month'))
       this.props.fetchEntries(newDate);
   }
-
-  showAddingForm = () => this.setState({
-    showEditForm: true,
-  });
-
-  hideAddingForm = () => this.setState({
-    showEditForm: false,
-  });
-
-  submitAddingForm = data => this.props.createEntry(data, this.props.date);
 
   nextDay = () => this.props.setDiaryDate(moment(this.props.date).add(1, 'days'));
 
@@ -76,35 +68,26 @@ class DiaryPage extends Component {
   };
 
   render() {
-    const { entries, date } = this.props;
+    const { authLogout, entries, date } = this.props;
     const { showEditForm, showDatePicker } = this.state;
     const entry = entries[date];
     return (
-      <div>
+      <Page onLogout={authLogout}>
         <Container>
-          <div className={styles.menuRow}>
-            <BlueButton className={styles.menuButton} value='<<' onClick={this.previousDay} />
-            <BlueButton
-              className={classNames(styles.menuButton, styles.dateButton)}
-              value={moment(date).format('dddd, MMMM Do YYYY')}
+          <Segmented>
+            <Button onClick={this.previousDay} icon='arrow_left' />
+            <Button
+              className={classNames(styles.dateButton)}
               onClick={this.showDatePicker}
-            />
-            <BlueButton
-              className={styles.menuButton}
-              value='>>'
+            >{moment(date).format('dddd, D MMMM YYYY')}</Button>
+            <Button
               onClick={this.nextDay}
               disabled={moment().isSame(date, 'day')}
+              icon='arrow_right'
             />
-          </div>
+          </Segmented>
         </Container>
-        <Card entry={entry} onEdit={this.showAddingForm}/>
-        {showEditForm &&
-          <EditEntryForm
-            initialValues={entry}
-            onCancel={this.hideAddingForm}
-            onSubmit={this.submitAddingForm}
-            onSubmitSuccess={this.hideAddingForm}
-          />}
+        <Card date={date} entry={entry} />
         {showDatePicker &&
           <DatePickerWindow
             date={date}
@@ -112,7 +95,7 @@ class DiaryPage extends Component {
             onClose={this.hideDatePicker}
           />
         }
-      </div>
+      </Page>
     );
   }
 }
@@ -127,5 +110,6 @@ export default connect(
     createEntry,
     deleteEntry,
     setDiaryDate,
+    authLogout,
   }
 )(DiaryPage);

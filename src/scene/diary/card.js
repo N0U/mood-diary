@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 import classNames from 'classnames'
 import { EntryShape, SleepLabels, ScaleSize } from '../../data/entries';
 import Container from '../../components/container/container';
-import { BlueButton } from '../../components/button/button';
+import { Button } from '../../components/button/button';
 import Row from '../../components/row/row';
 import { BlueBar, YellowBar, GreenBar, PinkBlocks } from '../../components/blocks/blocks';
 import { T } from '../../translations';
 import styles from './card.module.css';
 
-const Entry = ({ sleep, power, mood, insomnia, headache, heartache, comment, onEdit }) =>
+const Entry = ({ date, sleep, power, mood, insomnia, headache, heartache, comment }) =>
   <div>
     <Row label={T('params.sleep')}><BlueBar value={sleep} max={ScaleSize} options={SleepLabels}/></Row>
     <Row label={T('params.power')}><YellowBar value={power} max={ScaleSize}/></Row>
@@ -39,23 +39,23 @@ const Entry = ({ sleep, power, mood, insomnia, headache, heartache, comment, onE
         <div className={styles.comment}>{comment}</div>
       </Row>
     }
-    <BlueButton value={T('card.edit')} onClick={onEdit}/>
+    <Button link={`/edit/${date}`}>{T('card.edit')}</Button>
   </div>;
 
-const EmptyEntry = ({ onAdd }) =>
+const EmptyEntry = ({ date }) =>
   <div>
-    <BlueButton value={T('card.add')} onClick={onAdd}/>
+    <Button link={`/edit/${date}`}>{T('card.add')}</Button>
   </div>;
 
-const Card = ({ entry, onEdit }) => (
+const Card = ({ date, entry }) => (
   <Container>
-    {entry ? <Entry {...entry} onEdit={onEdit}/> : <EmptyEntry onAdd={onEdit}/>}
+    {entry ? <Entry {...entry}/> : <EmptyEntry date={date}/>}
   </Container>
 );
 
 export default Card;
 
 Card.propTypes = {
+  date: PropTypes.string.isRequired,
   entry: PropTypes.shape(EntryShape),
-  onEdit: PropTypes.func.isRequired,
 };

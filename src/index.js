@@ -8,6 +8,7 @@ import Spinner from './components/spinner/spinner';
 import App from './App';
 import 'reset-css';
 import 'react-day-picker/lib/style.css';
+import 'framework7-icons';
 import './index.css';
 import createStore from './store';
 

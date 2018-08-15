@@ -6,14 +6,22 @@ import { isLogged } from './store/auth/selectors';
 import { authLogout } from './store/auth/actions';
 import { locale } from './store/settings/selectors';
 import { setLocale } from './store/settings/actions';
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link
+} from "react-router-dom";
+import NavBar, { NavTitle } from './components/nav-bar/nav-bar';
 import Row from './components/row/row';
 import { BlueButton } from './components/button/button';
 import Modal from './components/modal/modal';
-import DiaryPagesWrapper from './scene/diary-pages-wrapper';
 import AuthPage from './scene/auth/auth-page';
 import DiaryPage from './scene/diary/diary-page';
 import TimelinePage from './scene/timeline/timeline-page';
 import ImportExportPage from './scene/import-export/import-export-page';
+import EditEntryPage from './scene/edit-entry/edit-entry-page';
 import styles from './app.module.css';
 import { T } from './translations';
 
@@ -34,7 +42,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: 'diary',
     };
   }
 
@@ -49,11 +56,6 @@ class App extends Component {
     showMenu: false,
   });
 
-  selectPage = page => this.setState({
-    showMenu: false,
-    page,
-  });
-
   onLogout = () => {
     this.props.authLogout();
     this.hideMenu();
@@ -61,39 +63,20 @@ class App extends Component {
 
   render() {
     const { isLogged, locale } = this.props;
-    const { showMenu, page } = this.state;
+    const { showMenu } = this.state;
     return (
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <BlueButton className={styles.headerButton} value={T('top.menu')} onClick={this.showMenu} disabled={!isLogged} />
-          <div className={styles.logo}>{T('top.title')}</div>
+      <Router>
+        <div className={styles.container}>
+          {isLogged && <Switch>
+            <Route path="/diary" component={DiaryPage} />
+            <Route path="/timeline" component={TimelinePage} />
+            <Route path="/impexp" component={ImportExportPage} />
+            <Route path="/edit/:date" component={EditEntryPage} />
+            <Route render={() => <Redirect to="/diary" />}/>
+          </Switch>}
+          {!isLogged && <Route component={AuthPage} />}
         </div>
-        <div className={styles.content}>
-          {isLogged ?
-            <DiaryPagesWrapper><PageSwitch
-              name={page}
-              pages={{
-                diary: DiaryPage,
-                timeline: TimelinePage,
-                importexport: ImportExportPage,
-              }}
-            /></DiaryPagesWrapper> :
-            <AuthPage />
-          }
-          {showMenu && isLogged &&
-            <Modal onBackgroundClick={this.hideMenu}>
-              <div className={styles.menuContainer}>
-                <Row><BlueButton className={styles.menuButton} value={T('menu.diary')} onClick={() => this.selectPage('diary')} /></Row>
-                <Row><BlueButton className={styles.menuButton} value={T('menu.timeline')} onClick={() => this.selectPage('timeline')} /></Row>
-                <hr />
-                <Row><BlueButton className={styles.menuButton} value={T('menu.impexp')} onClick={() => this.selectPage('importexport')} /></Row>
-                <hr />
-                <Row><BlueButton className={styles.menuButton} value={T('menu.logout')} onClick={this.onLogout} /></Row>
-              </div>
-            </Modal>
-          }
-        </div>
-      </div>
+      </Router>
     );
   }
 }

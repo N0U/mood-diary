@@ -43,3 +43,53 @@
 .gray:hover {
     background-color: #9e9e9e
 }
+
+.button {
+    display: inline-flex;
+    user-select: none;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 0.3em;
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 2.3em;
+    height: 2.4em;
+    margin-bottom: 0;
+    overflow: hidden;
+    padding: 0 1em;
+    text-align: center;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    border: 1px solid #007aff;
+    color: #007aff;
+    border-radius: 5px;
+    line-height: 27px;
+    height: 29px;
+}
+
+.active {
+    background: #007aff;
+    color: #fff;
+}
+
+.segmented {
+    display: flex;
+    flex-direction: row;
+}
+
+.segmented .button {
+    margin: 0;
+}
+
+.segmented .button:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+}
+
+.segmented .button:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}

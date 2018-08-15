@@ -35,3 +35,7 @@
 .textArea:focus {
     background-color: #b5b5b5;
 }
+
+.errorBar td {
+    border: 1px solid red;
+}
