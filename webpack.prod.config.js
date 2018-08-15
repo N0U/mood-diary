@@ -1,13 +1,33 @@
-const path = require('path');
-const webpack = require('webpack');
+const common = require('./webpack.config.js');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
-  entry: './src',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+  ...common,
+  mode: 'production',
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ],
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    }
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
@@ -16,6 +36,10 @@ module.exports = {
       filename: 'index.html',
       inject: 'body',
     }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
   ],
   module: {
     rules: [
@@ -27,9 +51,7 @@ module.exports = {
       {
         test: /^((?!\.module).)*css$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
           },
@@ -38,15 +60,12 @@ module.exports = {
       {
         test: /\.module.css$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               modules: true,
               importLoaders: '1',
-              localIdentName: '[name]__[local]'
             },
           },
           {
@@ -68,5 +87,5 @@ module.exports = {
         //exclude: /node_modules/,
       },
     ],
-  },
+  }
 };
