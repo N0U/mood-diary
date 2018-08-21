@@ -69,6 +69,11 @@
     height: 29px;
 }
 
+.button:disabled {
+    border-color: #7b7b7b;
+    color: #7b7b7b;
+}
+
 .active {
     background: #007aff;
     color: #fff;
