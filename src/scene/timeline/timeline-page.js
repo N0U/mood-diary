@@ -87,7 +87,7 @@ class TimelinePage extends Component {
     }
 
     return (
-      <Page onLogout={authLogout}>
+      <Page onLogout={authLogout} loading={isLoading}>
         <Container>
           <div className={styles.menuRow}>
             <Block

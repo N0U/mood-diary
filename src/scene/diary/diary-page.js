@@ -4,7 +4,7 @@ import moment from 'moment';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import connect from '../../utils/store-connect';
-import { entries, diaryDate } from '../../store/diary/selectors';
+import { isLoading, entries, diaryDate } from '../../store/diary/selectors';
 import {
   fetchEntries,
   createEntry,
@@ -22,6 +22,7 @@ import Page from '../../layouts/page/page';
 
 class DiaryPage extends Component {
   static propTypes = {
+    isLoading: PropTypes.bool,
     entries: PropTypes.objectOf(EntryShape).isRequired,
     date: PropTypes.string.isRequired,
 
@@ -68,11 +69,11 @@ class DiaryPage extends Component {
   };
 
   render() {
-    const { authLogout, entries, date } = this.props;
+    const { isLoading, authLogout, entries, date } = this.props;
     const { showEditForm, showDatePicker } = this.state;
     const entry = entries[date];
     return (
-      <Page onLogout={authLogout}>
+      <Page onLogout={authLogout} loading={isLoading}>
         <Container>
           <Segmented>
             <Button onClick={this.previousDay} icon='arrow_left' />
@@ -102,6 +103,7 @@ class DiaryPage extends Component {
 
 export default connect(
   {
+    isLoading,
     entries,
     date: diaryDate,
   },

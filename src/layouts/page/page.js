@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames'
 import NavBar from '../../components/nav-bar/nav-bar'
 import TabBar, { Tab } from '../../components/tab-bar/tab-bar';
+import Spinner from '../../components/spinner/spinner';
 import styles from './page.module.css';
 import { T } from '../../translations';
 
@@ -14,7 +15,7 @@ Header.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const Page = ({ header, children, onLogout }) => (
+const Page = ({ header, children, onLogout, loading }) => (
   <div className={styles.page}>
     {header || <Header>
       <NavBar right={{
@@ -33,6 +34,7 @@ const Page = ({ header, children, onLogout }) => (
     <div className={styles.content}>
       {children}
     </div>
+    {loading && <Spinner />}
   </div>
 );
 
@@ -43,4 +45,5 @@ Page.propTypes = {
   header: PropTypes.node,
   onLogout: PropTypes.func,
   children: PropTypes.node.isRequired,
+  loading: PropTypes.bool,
 };
