@@ -10,7 +10,7 @@ import {
   loginOAuth2,
 } from '../../store/auth/actions';
 import Spinner from '../../components/spinner/spinner';
-import { BlueButton } from '../../components/button/button';
+import { Button } from '../../components/button/button';
 import Container from '../../components/container/container';
 import Row from '../../components/row/row';
 import NavBar, { NavTitle } from '../../components/nav-bar/nav-bar'
@@ -58,8 +58,7 @@ class AuthPage extends Component {
     return (
       <Page header={this.renderHeader()}>
         <Container>
-          <Row><BlueButton value='Vk' onClick={this.vkLogin}/></Row>
-          {/*<Row><BlueButton value='GDisk' onClick={this.gDiskLogin} disabled /></Row>*/}
+          <Row><Button className={styles.authButton} onClick={this.vkLogin}>Vk</Button></Row>
         </Container>
         {isLoading && <Spinner />}
       </Page>
